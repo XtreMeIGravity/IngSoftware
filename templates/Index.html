@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block cssCustom %}
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+{% endblock cssCustom %}
+
+{% block title %} Proyecto 1{% endblock title %}
+{% block cuerpo %}
+
+    <main class="container py-5">
+        <h1>Plantas</h1>
+
+        <div class="row" data-masonry='{"percentPosition": true }'>
+
+            <div class="col-sm-6 col-lg-4 mb-4 text-black">
+                <div class="card">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="200"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#868e96"/>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                    </svg>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                            content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 mb-4 text-black">
+                <div class="card">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="200"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#868e96"/>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                    </svg>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                            content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+{% endblock cuerpo %}

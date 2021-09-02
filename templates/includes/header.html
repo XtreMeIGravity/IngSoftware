@@ -1,0 +1,40 @@
+<header class="p-3 text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="/static/img/Icon.png">
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'Index_App:Index' %}" class="nav-link px-2 text-secondary text-white ">Home</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'Index_App:nueva_publicacion' %}" class="nav-link px-2 text-secondary text-gray">Publicar</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary text-gray">Editar Publicaciones</a></li>
+                {% endif %}
+            </ul>
+
+
+            {% if user.is_authenticated %}
+                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <a href="#" class="nav-link px-2 text-secondary text-white">Bienvenido! {{ user.get_full_name }}</a>
+                </div>
+            {% endif %}
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="text" class="form-control form-control-light" placeholder="Buscar..." aria-label="Search">
+            </form>
+
+            {% if user.is_authenticated %}
+                <div class="text-end">
+                    <a class="btn btn-warning" href="{% url 'Users_App:user-logout' %}">Cerrar Sesion</a>
+                </div>
+            {% else %}
+                <div class="text-end">
+                    <a class="btn btn-outline-light me-2" href="{% url 'Users_App:user-login' %}">Iniciar Sesion</a>
+                    <a class="btn btn-warning" href="{% url 'Users_App:user-register' %}">Registrarse</a>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+</header>

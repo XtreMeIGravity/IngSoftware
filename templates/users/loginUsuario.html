@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cssCustom %}
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
+{% endblock cssCustom %}
+{% block title %} Registrar usuario {% endblock title %}
+{% block cuerpo %}
+    <section class="vh-50 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <div class="mb-md-5 mt-md-4 pb-5">
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5 ">Please enter your login and password!</p>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="row mb-4">
+                                            <div class="col">{{ field }}
+                                                <label for="{{ field.name }}">{{ field.label }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <label></label>
+                                    <!-- Error messaging -->
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                            {{ form.non_field_errors }}
+                                        </div>
+                                    {% endif %}
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong> {{ field.name }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!-- /Error messaging -->
+                                    <div class="row mb-6">
+                                        <button class="btn btn-outline-light btn-sm px-5" type="submit">Iniciar sesión
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div>
+                                <p class="mb-0">
+                                    ¿No tienes cuenta?
+                                    <a href="{% url 'Users_App:user-register' %}" class="text-white-50 fw-bold">Registrase</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock cuerpo %}
+
+
+{% block jsCustom %}
+    <script src="{% static 'js/register.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'locales/bootstrap-datepicker.de.min.js' %}"></script>
+{% endblock jsCustom %}
