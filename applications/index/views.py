@@ -6,6 +6,7 @@ from django.views.generic import (
     TemplateView,
 )
 from .forms import *
+from .models import *
 
 
 # Create your views here.
@@ -20,8 +21,8 @@ class NewPublicacionView(TemplateView):
     form_class = NewPublicacionForm
     success_url = '/'
 
-    """def form_valid(self, form):
-        User.objects.create_user(
+    def form_valid(self, form):
+        PublicacionesPlantas.objects.createPublicacion(
             form.cleaned_data['username'],
             form.cleaned_data['email'],
             form.cleaned_data['password1'],
@@ -30,4 +31,4 @@ class NewPublicacionView(TemplateView):
             sexo=form.cleaned_data['sexo'],
             fecha_nacimiento=date
         )
-        return super(NewPublicacionView, self).form_valid(form)"""
+        return super(NewPublicacionView, self).form_valid(form)
