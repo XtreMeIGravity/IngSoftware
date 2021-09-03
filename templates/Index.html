@@ -30,15 +30,20 @@
             <div class="row" data-masonry='{"percentPosition": true }'>
                 <div class="col-sm-6 col-lg-4 mb-4 text-black">
                     <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ Planta.usuario.nombres }} {{ Planta.usuario.apellidos }}</h5>
+                            <p class="card-text">Contacto: {{ Planta.usuario.email }}</p>
+                        </div>
                         <img src="{{ Planta.fotografia_Pub.url }}">
 
                         <div class="card-body">
-                            <h5 class="card-title">{{ Planta.planta_Pub.nombre_Planta}}</h5>
-                            <h4 class="card-title">{{ Planta.planta_Pub.tipo_Planta.nombre_TipoPlanta}}</h4>
-                            <h4 class="card-title">{{ Planta.planta_Pub.tipo_Planta.dimension_Planta}}</h4>
-                            <p class="card-text">{{ Planta.cuidados|safe  }}</p>
+                            <h4 class="card-title">{{ Planta.planta_Pub.nombre_Planta }}</h4>
+                            <h5 class="card-title">{{ Planta.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
+                            <h6 class="card-title">{{ Planta.planta_Pub.dimension_Planta.nombre_DimensionPlanta }}</h6>
+                            <p class="card-text">{{ Planta.cuidados|safe }}</p>
                             <p class="card-text"><small class="text-muted">
-                                Lugar: {{ Planta.lugar_Sembrada_Pub }} -- Fecha en que se sembro:{{ Planta.fecha_Sembrada }}</small></p>
+                                Lugar: {{ Planta.lugar_Sembrada_Pub }} -- Fecha en que se
+                                sembro:{{ Planta.fecha_Sembrada }}</small></p>
                         </div>
                     </div>
                 </div>
