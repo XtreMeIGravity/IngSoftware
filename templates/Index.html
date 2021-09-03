@@ -26,46 +26,24 @@
 
     <main class="container py-5">
         <h1>Plantas</h1>
+        {% for Planta  in ListaPublicaciones %}
+            <div class="row" data-masonry='{"percentPosition": true }'>
+                <div class="col-sm-6 col-lg-4 mb-4 text-black">
+                    <div class="card">
+                        <img src="{{ Planta.fotografia_Pub.url }}">
 
-        <div class="row" data-masonry='{"percentPosition": true }'>
-
-            <div class="col-sm-6 col-lg-4 mb-4 text-black">
-                <div class="card">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="200"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#868e96"/>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ Planta.planta_Pub.nombre_Planta}}</h5>
+                            <h4 class="card-title">{{ Planta.planta_Pub.tipo_Planta.nombre_TipoPlanta}}</h4>
+                            <h4 class="card-title">{{ Planta.planta_Pub.tipo_Planta.dimension_Planta}}</h4>
+                            <p class="card-text">{{ Planta.cuidados|safe  }}</p>
+                            <p class="card-text"><small class="text-muted">
+                                Lugar: {{ Planta.lugar_Sembrada_Pub }} -- Fecha en que se sembro:{{ Planta.fecha_Sembrada }}</small></p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-6 col-lg-4 mb-4 text-black">
-                <div class="card">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="200"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#868e96"/>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        {% endfor %}
 
     </main>
 

@@ -5,7 +5,7 @@ from applications.users.models import User
 
 # Create your models here.
 
-class DimensionPlanta(models.Model):
+class CatDimensionPlanta(models.Model):
     nombre_DimensionPlanta = models.CharField('DimensionPlanta', max_length=50)
 
     class Meta:
@@ -16,7 +16,7 @@ class DimensionPlanta(models.Model):
         return self.nombre_DimensionPlanta
 
 
-class TipoPlanta(models.Model):
+class CatTipoPlanta(models.Model):
     nombre_TipoPlanta = models.CharField('TipoPlanta', max_length=50)
 
     class Meta:
@@ -29,17 +29,14 @@ class TipoPlanta(models.Model):
 
 class Planta(models.Model):
     nombre_Planta = models.CharField(max_length=50, unique=True)
-    tipo_Planta = models.ForeignKey(TipoPlanta, on_delete=models.CASCADE)
-    dimension_Planta = models.ForeignKey(DimensionPlanta, on_delete=models.CASCADE)
+    tipo_Planta = models.ForeignKey(CatTipoPlanta, on_delete=models.CASCADE)
+    dimension_Planta = models.ForeignKey(CatDimensionPlanta, on_delete=models.CASCADE)
 
-    def get_short_name(self):
-        return self.username
-
-    def get_full_name(self):
-        return self.nombres + " " + self.apellidos
+    def __str__(self):
+        return self.nombre_Planta
 
 
-class LugarPlanta(models.Model):
+class CatLugarPlanta(models.Model):
     lugar_Planta = models.CharField('LugarPlanta', max_length=50)
 
     class Meta:
@@ -47,13 +44,14 @@ class LugarPlanta(models.Model):
         verbose_name_plural = "LugarPlantas"
 
     def __str__(self):
-        return self.LugarPlanta
+        return self.lugar_Planta
 
 
 class PublicacionesPlantas(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fotografia_Pub = models.ImageField(upload_to='planta')
-    planta_Pub = models.ManyToManyField(Planta)
-    lugar_Sembrada_Pub = models.ForeignKey(LugarPlanta, on_delete=models.CASCADE)
+    planta_Pub = models.ForeignKey(Planta, on_delete=models.CASCADE)
+    lugar_Sembrada_Pub = models.ForeignKey(CatLugarPlanta, on_delete=models.CASCADE)
     fecha_Sembrada = models.DateField()
     sombra = models.BooleanField()
     sol = models.BooleanField()

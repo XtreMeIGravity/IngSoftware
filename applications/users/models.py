@@ -1,7 +1,7 @@
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import UserManager
+
 
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
@@ -15,7 +15,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     nombres = models.CharField(max_length=50, blank=True)
     apellidos = models.CharField(max_length=50, blank=True)
     sexo = models.CharField(choices=Gender_Choices, max_length=50, blank=True)
-    fecha_nacimiento = models.DateField(blank=True)
+    fecha_nacimiento = models.DateField(default="1998-09-15", blank=True)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'

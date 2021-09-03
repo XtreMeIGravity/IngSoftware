@@ -8,8 +8,9 @@
                 <li><a href="{% url 'Index_App:Index' %}" class="nav-link px-2 text-secondary text-white ">Home</a></li>
 
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'Index_App:nueva_publicacion' %}" class="nav-link px-2 text-secondary text-gray">Publicar</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary text-gray">Editar Publicaciones</a></li>
+                    <li><a href="{% url 'Index_App:nueva_publicacion' %}"
+                           class="nav-link px-2 text-secondary text-gray">Publicar</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary text-gray">Mis Publicaciones</a></li>
                 {% endif %}
             </ul>
 
@@ -19,9 +20,13 @@
                     <a href="#" class="nav-link px-2 text-secondary text-white">Bienvenido! {{ user.get_full_name }}</a>
                 </div>
             {% endif %}
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="text" class="form-control form-control-light" placeholder="Buscar..." aria-label="Search">
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get">{% csrf_token %}
+                <input type="text" class="form-control form-control-light" placeholder="Buscar planta..." aria-label="Search">
             </form>
+                <div class="text-end">
+                    <button class="btn btn-outline-light me-2">Buscar</button>
+                </div>
 
             {% if user.is_authenticated %}
                 <div class="text-end">
