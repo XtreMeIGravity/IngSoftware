@@ -127,7 +127,6 @@ class UserRegisterForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(
         label='username',
-        min_length=5,
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'username',
@@ -138,7 +137,6 @@ class LoginForm(forms.Form):
 
     password = forms.CharField(
         label='Contraseña',
-        min_length=5,
         widget=forms.PasswordInput(
             attrs={
                 'placeholder': 'Contraseña',

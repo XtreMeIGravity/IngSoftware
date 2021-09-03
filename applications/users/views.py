@@ -21,9 +21,7 @@ class UserRegisterView(FormView):
 
     def form_valid(self, form):
         date = form.cleaned_data['fecha_nacimiento']
-        print(date)
         date = datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')
-        print(date)
         User.objects.create_user(
             form.cleaned_data['username'],
             form.cleaned_data['email'],

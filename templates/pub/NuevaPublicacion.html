@@ -5,13 +5,77 @@
 {% block cssCustom %}
     <link rel="stylesheet" href="{% static "css/register.css" %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 16px Arial;
+        }
+
+        /*the container must be positioned relative:*/
+        .autocomplete {
+            position: unset;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .autocomplete-items {
+            position: unset;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
 {% endblock cssCustom %}
 
 {% block title %} Registrar planta{% endblock title %}
 {% block cuerpo %}
 
-    <main >
-        <section class="vh-50 gradient-custom">
+    <main>
+        <section class="vh-50 gradient-custom ">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
@@ -19,17 +83,18 @@
                             <div class="card-body p-5 text-center">
                                 <div class="mb-md-5 mt-md-4 pb-5">
                                     <h2 class="fw-bold mb-2 text-uppercase">Nueva Publicacion</h2>
-                                    <form method="post">
-                                        {% csrf_token %}
-                                        {{ form.as_p }}
-                                        {% for field in form %}
-                                            <div class="row mb-4">
-                                                <div class="col">{{ field }}
-                                                    <label for="{{ field.name }}">{{ field.label }}</label>
+                                    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                                        <div class="row">
+                                            {% for field in form %}
+                                                <div class="{% if field.label == "Cuidados" %}  col-sm-12 col-lg-12 mb-12 form-outline  {% else %} col-sm-12 col-lg-6 mb-4 form-outline {% endif %}">
+                                                    <div class="col"><label
+                                                            for="{{ field.name }}">{{ field.label }}</label>
+                                                        {% if field.label == "Cuidados" %}<br> {% endif %}
+                                                        {{ field }}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        {% endfor %}
-                                        <label></label>
+                                            {% endfor %}
+                                        </div>
                                         <!-- Error messaging -->
                                         {% if form.non_field_errors %}
                                             <div class="alert alert-danger">
@@ -47,18 +112,12 @@
                                             {% endif %}
                                         {% endfor %}
                                         <!-- /Error messaging -->
-                                        <div class="row mb-6">
-                                            <button class="btn btn-outline-light btn-sm px-5" type="submit">Registrar
+                                        <div class="row mb-2">
+                                            <button class="btn btn-outline-light btn-sm px-1" type="submit">Registrar
                                             </button>
                                         </div>
 
                                     </form>
-                                </div>
-                                <div>
-                                    <p class="mb-0">
-                                        ¿No tienes cuenta?
-                                        <a href="{% url 'Users_App:user-register' %}" class="text-white-50 fw-bold">Registrase</a>
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -71,3 +130,21 @@
 
 
 {% endblock cuerpo %}
+{% block jsCustom %}
+    <script src="{% static 'js/publicaciones.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'locales/bootstrap-datepicker.es.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <script>
+        $(function () {
+            var availableTags = [
+                {% for p in Plantas %}
+                    "{{p.nombre_Planta}}",
+                {% endfor %}
+            ];
+            autocomplete(document.getElementById("id_planta_Pub"), availableTags);
+        });
+    </script>
+{% endblock jsCustom %}

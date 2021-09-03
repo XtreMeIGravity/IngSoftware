@@ -21,12 +21,12 @@
                 </div>
             {% endif %}
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get">{% csrf_token %}
-                <input type="text" class="form-control form-control-light" placeholder="Buscar planta..." aria-label="Search">
-            </form>
-                <div class="text-end">
-                    <button class="btn btn-outline-light me-2">Buscar</button>
+            <form method="get">{% csrf_token %}
+                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="text" class="form-control form-control-light" placeholder="Buscar planta..."
+                           aria-label="Search" name="keyword" id="keyword">
                 </div>
+            </form>
 
             {% if user.is_authenticated %}
                 <div class="text-end">

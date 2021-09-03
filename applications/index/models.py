@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from .managers import PublicacionManager
 from applications.users.models import User
 
 
@@ -48,14 +49,17 @@ class CatLugarPlanta(models.Model):
 
 
 class PublicacionesPlantas(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fotografia_Pub = models.ImageField(upload_to='planta')
     planta_Pub = models.ForeignKey(Planta, on_delete=models.CASCADE)
-    lugar_Sembrada_Pub = models.ForeignKey(CatLugarPlanta, on_delete=models.CASCADE)
     fecha_Sembrada = models.DateField()
+    lugar_Sembrada_Pub = models.ForeignKey(CatLugarPlanta, on_delete=models.CASCADE)
     sombra = models.BooleanField()
     sol = models.BooleanField()
     cuidados = RichTextField(blank=True, null=True)
+
+    # import manager
+    objects = PublicacionManager()
 
     def get_short_name(self):
         return self.username

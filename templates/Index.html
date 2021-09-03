@@ -22,12 +22,12 @@
 {% endblock cssCustom %}
 
 {% block title %} Proyecto 1{% endblock title %}
-{% block cuerpo %}
 
+{% block cuerpo %}
     <main class="container py-5">
         <h1>Plantas</h1>
-        {% for Planta  in ListaPublicaciones %}
-            <div class="row" data-masonry='{"percentPosition": true }'>
+        <div class="row" data-masonry='{"percentPosition": true }'>
+            {% for Planta  in ListaPublicaciones %}
                 <div class="col-sm-6 col-lg-4 mb-4 text-black">
                     <div class="card">
                         <div class="card-body">
@@ -47,11 +47,43 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
+        <nav aria-label="Page navigation example text-black">
+            <ul class="pagination justify-content-center text-black">
+                {% if page_obj.has_previous %}
+                    <li class="page-item text-black"><a class="page-link text-black"
+                                                        href="?page={{ page_obj.previous_page_number }}"
+                                                        tabindex="-1">Previous</a></li>
+                {% else %}
+                    <li class="page-item disabled text-black"><a class="page-link text-black" href="#" tabindex="-1">Previous</a>
+                    </li>
+                {% endif %}
+
+                {% for x in paginator.page_range %}
+                    {% if page_obj.number == x %}
+                        <li class=" text-black border-dark"><a class="page-link text-black"
+                                                               style="color:black;background-color: #ffc107">{{ x }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item text-black"><a class="page-link text-black"
+                                                            href="?page={{ x }}">{{ x }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-black" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link text-black" href="#">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        {% if is_paginated %}
+        {% endif %}
     </main>
-
-
-
 {% endblock cuerpo %}
