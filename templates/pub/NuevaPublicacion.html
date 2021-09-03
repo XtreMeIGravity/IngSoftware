@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block cssCustom %}
-
     <link rel="stylesheet" href="{% static "css/register.css" %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
 {% endblock cssCustom %}
@@ -22,6 +21,7 @@
                                     <h2 class="fw-bold mb-2 text-uppercase">Nueva Publicacion</h2>
                                     <form method="post">
                                         {% csrf_token %}
+                                        {{ form.as_p }}
                                         {% for field in form %}
                                             <div class="row mb-4">
                                                 <div class="col">{{ field }}

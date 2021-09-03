@@ -2,18 +2,34 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.views.generic import (
-    TemplateView,
-)
 from .forms import *
 from .models import *
 
 
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    TemplateView,
+    UpdateView,
+    DeleteView,
+)
+
 # Create your views here.
 
-class IndexView(TemplateView):
-    """vista que carga la pagina de inicio"""
-    template_name = "Index.html"
+# GRID DATA
+class IndexView(ListView):
+    template_name = 'Index.html'
+    model = PublicacionesPlantas
+    context_object_name = 'ListaPublicaciones'
+    paginate_by = 7
+
+    def get_queryset(self):
+        busqueda = self.request.GET.get('keyword', '')
+        lista = PublicacionesPlantas.objects.filter(
+            planta_Pub__nombre_Planta__icontains=busqueda,
+        )
+        return lista
 
 
 class NewPublicacionView(TemplateView):
@@ -22,13 +38,5 @@ class NewPublicacionView(TemplateView):
     success_url = '/'
 
     def form_valid(self, form):
-        PublicacionesPlantas.objects.createPublicacion(
-            form.cleaned_data['username'],
-            form.cleaned_data['email'],
-            form.cleaned_data['password1'],
-            nombres=form.cleaned_data['nombres'],
-            apellidos=form.cleaned_data['apellidos'],
-            sexo=form.cleaned_data['sexo'],
-            fecha_nacimiento=date
-        )
+        PublicacionesPlantas.objects.createPublicacion()
         return super(NewPublicacionView, self).form_valid(form)

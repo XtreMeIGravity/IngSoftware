@@ -30,7 +30,10 @@ LOCAL_APPS = (
     'applications.index',
     'applications.users',
 )
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    #
+    'ckeditor',
+)
 
 DJANGO_APPS= (
     'django.contrib.admin',

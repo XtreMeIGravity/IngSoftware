@@ -6,7 +6,6 @@ from .models import PublicacionesPlantas
 
 class NewPublicacionForm(forms.ModelForm):
     """Form definition users"""
-
     fecha_Sembrada = forms.CharField(
         label="Fecha de sembrado",
         required=True,
@@ -29,6 +28,10 @@ class NewPublicacionForm(forms.ModelForm):
                   'sol',
                   'cuidados',
                   )
+        widgets = {
+            'cuidados': forms.Textarea(),
+            'habilidades': forms.ChoiceField(),
+        }
 
     def validateDateEs(self, date):
         """        Funcion para validar una fecha en formato        """
