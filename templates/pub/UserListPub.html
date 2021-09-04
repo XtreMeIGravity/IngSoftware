@@ -23,9 +23,9 @@
 {% block title %} Proyecto 1{% endblock title %}
 
 {% block cuerpo %}
-{% include "includes/header.html" with active_tab='Index' %}
+    {% include "includes/header.html" with active_tab='MisPublicaciones' %}
     <main class="container py-5">
-        <h1>Plantas</h1>
+        <h1>Mis Plantas</h1>
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for Planta  in ListaPublicaciones %}
                 <div class="col-sm-6 col-lg-4 mb-4 text-black">
@@ -44,6 +44,10 @@
                             <p class="card-text"><small class="text-muted">
                                 Lugar: {{ Planta.lugar_Sembrada_Pub }} -- Fecha en que se
                                 sembro:{{ Planta.fecha_Sembrada }}</small></p>
+                            <p class="card-text"><small class="text-muted">
+                                <a class="btn btn-warning" href="{% url 'Index_App:editar_publicacion' Planta.id %}" >Actualizar</a>
+                                <a class="btn btn-danger"  href="{% url 'Index_App:eliminar_publicacion' Planta.id %}">Borrar</a>
+                            </small></p>
                         </div>
                     </div>
                 </div>
@@ -87,5 +91,5 @@
         {% endif %}
     </main>
 
-{% include "includes/footer.html" %}
+    {% include "includes/footer.html" %}
 {% endblock cuerpo %}

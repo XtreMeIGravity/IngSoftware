@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from datetime import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import PublicacionesPlantas, Planta, User
 from django.views.generic import (
@@ -10,6 +11,10 @@ from django.views.generic import (
     TemplateView,
     UpdateView,
     DeleteView,
+)
+from django.views.generic.edit import (
+    View,
+    FormView,
 )
 
 
@@ -26,7 +31,21 @@ class IndexView(ListView):
         return PublicacionesPlantas.objects.listarPublicacion(busqueda)
 
 
-class NewPublicacionView(CreateView):
+class UserPubView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('Users_App:user-login')
+
+    template_name = 'pub/UserListPub.html'
+    context_object_name = 'ListaPublicaciones'
+    paginate_by = 9
+
+    def get_queryset(self):
+        busqueda = self.request.GET.get('keyword', '')
+        return PublicacionesPlantas.objects.listarPublicacionByUser(self.request.user, busqueda)
+
+
+class NewPublicacionView(LoginRequiredMixin, FormView):
+    login_url = reverse_lazy('Users_App:user-login')
+
     template_name = 'pub/NuevaPublicacion.html'
     form_class = NewPublicacionForm
     success_url = reverse_lazy('Index_App:Index')
@@ -41,9 +60,9 @@ class NewPublicacionView(CreateView):
         return data
 
     def form_valid(self, form):
-        user = User.objects.filter(username=self.request.user)
-        user = user.get()
-        PublicacionesPlantas.objects.create(
+        """user = User.objects.filter(username=self.request.user)
+        user = user.get()"""
+        PublicacionesPlantas.objects.createPublicacion(
             fotografia_Pub=form.cleaned_data['fotografia_Pub'],
             planta_Pub=form.cleaned_data['planta_Pub'],
             lugar_Sembrada_Pub=form.cleaned_data['lugar_Sembrada_Pub'],
@@ -51,6 +70,40 @@ class NewPublicacionView(CreateView):
             sombra=form.cleaned_data['sombra'],
             sol=form.cleaned_data['sol'],
             cuidados=form.cleaned_data['cuidados'],
-            usuario=user,
+            usuario=self.request.user
         )
         return super(NewPublicacionView, self).form_valid(form)
+
+
+# update view
+class PublicacionUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('Users_App:user-login')
+    model = PublicacionesPlantas
+    template_name = "pub/ActualizarPublicacion.html"
+    """form_class = NewPublicacionForm"""
+    """funciona"""
+    form_class = UpdatePublicacionForm
+    success_url = reverse_lazy('Index_App:user-publicaciones')
+
+    def __init__(self, *args, **kwargs):
+        super(PublicacionUpdateView, self).__init__(*args, **kwargs)  # This is not working
+
+    # Intercept values of POST
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print(request.POST)
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Logic Process
+        empleado = form.save()
+        empleado.save()
+        return super(PublicacionUpdateView, self).form_valid(form)
+
+
+# delete view
+class PublicacionDeleteView(LoginRequiredMixin, DeleteView):
+    model = PublicacionesPlantas
+    context_object_name = 'PublicacionAEliminar'
+    template_name = "pub/DeletePublicacion.html"
+    success_url = reverse_lazy('Index_App:user-publicaciones')

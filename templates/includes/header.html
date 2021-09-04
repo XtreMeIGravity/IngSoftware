@@ -5,19 +5,18 @@
                 <img src="/static/img/Icon.png">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{% url 'Index_App:Index' %}" class="nav-link px-2 text-secondary text-white ">Home</a></li>
-
+                <li><a  href="{% url 'Index_App:Index' %}" class="nav-link px-2 text-secondary  {% if active_tab == 'Index' %} text-white {% endif %}">Home</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'Index_App:nueva_publicacion' %}"
-                           class="nav-link px-2 text-secondary text-gray">Publicar</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary text-gray">Mis Publicaciones</a></li>
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Publicar' %} text-white {% endif %}">Publicar</a></li>
+                    <li><a href="{% url 'Index_App:user-publicaciones' %}" class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'MisPublicaciones' %} text-white {% endif %}">Mis Publicaciones</a></li>
                 {% endif %}
             </ul>
 
 
             {% if user.is_authenticated %}
                 <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <a href="#" class="nav-link px-2 text-secondary text-white">Bienvenido! {{ user.get_full_name }}</a>
+                    <a class="nav-link px-2 text-secondary text-white disabled">Bienvenido! {{ user.get_full_name }}</a>
                 </div>
             {% endif %}
 

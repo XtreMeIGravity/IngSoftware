@@ -15,8 +15,6 @@ def validateDateEs(date):
 
 
 class NewPublicacionForm(forms.ModelForm):
-    """Form definition users"""
-
     fotografia_Pub = forms.ImageField(
         label="Fotografia",
         required=True,
@@ -27,7 +25,6 @@ class NewPublicacionForm(forms.ModelForm):
             }
         )
     )
-
     fecha_Sembrada = forms.CharField(
         label="Fecha de sembrado",
         required=True,
@@ -39,9 +36,45 @@ class NewPublicacionForm(forms.ModelForm):
         )
     )
 
-
     def __init__(self, *args, **kwargs):
         super(NewPublicacionForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            if not (visible.field.label == 'Sol' or visible.field.label == 'Sombra'):
+                visible.field.widget.attrs['class'] = 'form-control form-control-sm'
+
+    class Meta:
+        """meta definition for userForm"""
+        model = PublicacionesPlantas
+        fields = ['planta_Pub', 'fotografia_Pub', 'lugar_Sembrada_Pub', 'fecha_Sembrada', 'sombra', 'sol', 'cuidados']
+        widgets = {
+            'fecha_Sembrada': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%d-%m-%Y'),
+        }
+
+
+class UpdatePublicacionForm(forms.ModelForm):
+    fotografia_Pub = forms.ImageField(
+        label="Fotografia",
+        required=True,
+        widget=forms.FileInput(
+            attrs={
+                'placeholder': 'Fecha de Sembrado',
+                'class': 'form-control form-control-sm'
+            }
+        )
+    )
+    fecha_Sembrada = forms.CharField(
+        label="Fecha de sembrado",
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Fecha de Sembrado',
+                'class': 'form-control form-control-sm'
+            }
+        )
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(UpdatePublicacionForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             if not (visible.field.label == 'Sol' or visible.field.label == 'Sombra'):
                 visible.field.widget.attrs['class'] = 'form-control form-control-sm'

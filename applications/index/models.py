@@ -61,8 +61,3 @@ class PublicacionesPlantas(models.Model):
     # import manager
     objects = PublicacionManager()
 
-    def get_short_name(self):
-        return self.username
-
-    def get_full_name(self):
-        return self.nombres + " " + self.apellidos
