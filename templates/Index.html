@@ -23,19 +23,20 @@
 {% block title %} Proyecto 1{% endblock title %}
 
 {% block cuerpo %}
-{% include "includes/header.html" with active_tab='Index' %}
+    {% include "includes/header.html" with active_tab='Index' %}
     <main class="container py-5">
         <h1>Plantas</h1>
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for Planta  in ListaPublicaciones %}
-                <div class="col-sm-6 col-lg-4 mb-4 text-black">
+                <div class="col-sm-6 col-lg-12 mb-4 text-black">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ Planta.usuario.nombres }} {{ Planta.usuario.apellidos }}</h5>
                             <p class="card-text">Contacto: {{ Planta.usuario.email }}</p>
                         </div>
-                        <img src="{{ Planta.fotografia_Pub.url }}">
-
+                        <div class="row-cols-5">
+                            <img src="{{ Planta.fotografia_Pub.url }}">
+                        </div>
                         <div class="card-body row">
                             <h4 class="card-title">{{ Planta.planta_Pub.nombre_Planta }}</h4>
                             <h5 class="card-title">{{ Planta.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
@@ -87,5 +88,5 @@
         {% endif %}
     </main>
 
-{% include "includes/footer.html" %}
+    {% include "includes/footer.html" %}
 {% endblock cuerpo %}
