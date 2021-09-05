@@ -61,3 +61,6 @@ class PublicacionesPlantas(models.Model):
     # import manager
     objects = PublicacionManager()
 
+    class Meta:
+        ordering = ['-id']
+
