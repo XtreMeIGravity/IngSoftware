@@ -20,7 +20,9 @@ from django.views.generic.edit import (
 
 # Create your views here.
 
-# GRID DATA
+##############
+# INDEX VIEW #
+##############
 class IndexView(ListView):
     template_name = 'Index.html'
     context_object_name = 'ListaPublicaciones'
@@ -31,6 +33,9 @@ class IndexView(ListView):
         return PublicacionesPlantas.objects.listarPublicacion(busqueda)
 
 
+##############
+# USER VIEWS #
+##############
 class UserPubView(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('Users_App:user-login')
 
@@ -43,6 +48,9 @@ class UserPubView(LoginRequiredMixin, ListView):
         return PublicacionesPlantas.objects.listarPublicacionByUser(self.request.user, busqueda)
 
 
+#####################
+# PUBLICATION VIEWS #
+#####################
 class NewPublicacionView(LoginRequiredMixin, FormView):
     login_url = reverse_lazy('Users_App:user-login')
 
@@ -107,3 +115,8 @@ class PublicacionDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'PublicacionAEliminar'
     template_name = "pub/DeletePublicacion.html"
     success_url = reverse_lazy('Index_App:user-publicaciones')
+
+
+#################
+# PLANTAS VIEWS #
+#################

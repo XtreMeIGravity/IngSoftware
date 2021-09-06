@@ -6,6 +6,9 @@ from applications.users.models import User
 
 # Create your models here.
 
+############################
+# CatDimensionPlanta model #
+############################
 class CatDimensionPlanta(models.Model):
     nombre_DimensionPlanta = models.CharField('DimensionPlanta', max_length=50)
 
@@ -17,6 +20,9 @@ class CatDimensionPlanta(models.Model):
         return self.nombre_DimensionPlanta
 
 
+#######################
+# CatTipoPlanta model #
+#######################
 class CatTipoPlanta(models.Model):
     nombre_TipoPlanta = models.CharField('TipoPlanta', max_length=50)
 
@@ -28,15 +34,21 @@ class CatTipoPlanta(models.Model):
         return self.nombre_TipoPlanta
 
 
+################
+# Planta model #
+################
 class Planta(models.Model):
     nombre_Planta = models.CharField(max_length=50, unique=True)
     tipo_Planta = models.ForeignKey(CatTipoPlanta, on_delete=models.CASCADE)
     dimension_Planta = models.ForeignKey(CatDimensionPlanta, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre_Planta
+        return self.nombre_Planta+" "+self.tipo_Planta.nombre_TipoPlanta+" "+self.dimension_Planta.nombre_DimensionPlanta
 
 
+########################
+# CatLugarPlanta model #
+########################
 class CatLugarPlanta(models.Model):
     lugar_Planta = models.CharField('LugarPlanta', max_length=50)
 
@@ -48,6 +60,9 @@ class CatLugarPlanta(models.Model):
         return self.lugar_Planta
 
 
+#####################
+# PUBLICATION MODEL #
+#####################
 class PublicacionesPlantas(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fotografia_Pub = models.ImageField(upload_to='planta')
@@ -63,4 +78,3 @@ class PublicacionesPlantas(models.Model):
 
     class Meta:
         ordering = ['-id']
-
