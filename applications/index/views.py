@@ -33,9 +33,10 @@ class IndexView(ListView):
         return PublicacionesPlantas.objects.listarPublicacion(busqueda)
 
 
-##############
-# USER VIEWS #
-##############
+
+#####################
+# PUBLICATION VIEWS #
+#####################
 class UserPubView(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('Users_App:user-login')
 
@@ -48,9 +49,6 @@ class UserPubView(LoginRequiredMixin, ListView):
         return PublicacionesPlantas.objects.listarPublicacionByUser(self.request.user, busqueda)
 
 
-#####################
-# PUBLICATION VIEWS #
-#####################
 class NewPublicacionView(LoginRequiredMixin, FormView):
     login_url = reverse_lazy('Users_App:user-login')
 

@@ -74,10 +74,6 @@
 {% block title %} Registrar planta{% endblock title %}
 {% block cuerpo %}
     {% include "includes/header.html" with active_tab='MisPublicaciones' %}
-
-    {% if form.usuario.value == request.user.id %}
-    {% else %}
-    {% endif %}
     <main>
         <section class="vh-50 gradient-custom ">
             <div class="container py-5 h-100">

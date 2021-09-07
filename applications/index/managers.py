@@ -20,21 +20,6 @@ class PublicacionManager(models.Manager):
         )
         return lista
 
-    """def ActualizarPublicacion(self, fotografia_Pub, planta_Pub, lugar_Sembrada_Pub, fecha_Sembrada, sombra, sol,
-                              cuidados, usuario):
-        Publicacion = self.model(
-            fotografia_Pub=fotografia_Pub,
-            planta_Pub=planta_Pub,
-            lugar_Sembrada_Pub=lugar_Sembrada_Pub,
-            fecha_Sembrada=fecha_Sembrada,
-            sombra=sombra,
-            sol=sol,
-            cuidados=cuidados,
-            usuario=usuario
-        )
-        Publicacion.save(using=self.db)
-        return Publicacion"""
-
     def createPublicacion(self, fotografia_Pub, planta_Pub, lugar_Sembrada_Pub, fecha_Sembrada, sombra, sol, cuidados,
                           usuario):
         Publicacion = self.model(
