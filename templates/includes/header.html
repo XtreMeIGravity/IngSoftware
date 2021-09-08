@@ -19,7 +19,8 @@
                            class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'NuevaPlanta' %} text-white {% endif %}">Nueva
                         Planta</a></li>
                     <li><a href="{% url 'Index_App:listar_plantas' %}"
-                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Plantas' %} text-white {% endif %}">Plantas</a></li>
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Plantas' %} text-white {% endif %}">Plantas</a>
+                    </li>
                 {% endif %}
             </ul>
 
@@ -30,12 +31,14 @@
                 </div>
             {% endif %}
 
-            <form method="get">{% csrf_token %}
-                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="text" class="form-control form-control-light" placeholder="Buscar planta..."
-                           aria-label="Search" name="keyword" id="keyword">
-                </div>
-            </form>
+            {% if active_tab == 'Plantas' or active_tab == 'MisPublicaciones' or active_tab == 'Index' %}
+                <form method="get">{% csrf_token %}
+                    <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="text" class="form-control form-control-light" placeholder="Buscar planta..."
+                               aria-label="Search" name="keyword" id="keyword">
+                    </div>
+                </form>
+            {% endif %}
 
             {% if user.is_authenticated %}
                 <div class="text-end">
