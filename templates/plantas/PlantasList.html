@@ -29,7 +29,6 @@
             <table class="table text-white">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Planta</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Dimensión</th>
@@ -39,8 +38,7 @@
 
                 {% for Planta  in ListaPlantas %}
                     <tr>
-                        <th scope="row">{{ Planta.id }}</th>
-                        <td>{{ Planta.nombre_Planta }}</td>
+                        <th>{{ Planta.nombre_Planta }}</th>
                         <td>{{ Planta.tipo_Planta.nombre_TipoPlanta }}</td>
                         <td>{{ Planta.dimension_Planta.nombre_DimensionPlanta }}</td>
                     </tr>

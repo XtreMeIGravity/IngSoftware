@@ -46,7 +46,7 @@ class Planta(models.Model):
     objects = PlantasManager()
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['nombre_Planta']
 
     def __str__(self):
         return self.nombre_Planta + " - " + self.tipo_Planta.nombre_TipoPlanta + " - " + self.dimension_Planta.nombre_DimensionPlanta
