@@ -71,9 +71,9 @@
     </style>
 {% endblock cssCustom %}
 
-{% block title %}Actualizar Publicación {% endblock title %}
+{% block title %}Nueva Planta{% endblock title %}
 {% block cuerpo %}
-    {% include "includes/header.html" with active_tab='MisPublicaciones' %}
+    {% include "includes/header.html" with active_tab='NuevaPlanta' %}
     <main>
         <section class="vh-50 gradient-custom ">
             <div class="container py-5 h-100">
@@ -82,16 +82,11 @@
                         <div class="card bg-dark text-white" style="border-radius: 1rem;">
                             <div class="card-body p-5 text-center">
                                 <div class="mb-md-5 mt-md-4 pb-5">
-                                    <h2 class="fw-bold mb-2 text-uppercase">Editar Publicacion</h2>
-                                    <div class="row-cols-sm-6">
-                                        <img src="{{ form.fotografia_Pub.value.url }}"
-                                             class="img-thumbnail"
-                                             alt="Cinque Terre">
-                                    </div>
+                                    <h2 class="fw-bold mb-2 text-uppercase">Nueva Planta</h2>
                                     <form method="post" enctype="multipart/form-data">{% csrf_token %}
                                         <div class="row">
                                             {% for field in form %}
-                                                <div class="{% if field.label == "Cuidados" %}  col-sm-12 col-lg-12 mb-12 form-outline  {% else %} col-sm-12 col-lg-6 mb-4 form-outline {% endif %}">
+                                                <div class="{% if field.label == "Cuidados" %}  col-sm-12 col-lg-12 mb-12 form-outline  {% else %} col-sm-12 col-lg-4 mb-6 form-outline {% endif %}">
                                                     <div class="col"><label
                                                             for="{{ field.name }}">{{ field.label }}</label>
                                                         {% if field.label == "Cuidados" %}<br> {% endif %}
@@ -117,12 +112,12 @@
                                             {% endif %}
                                         {% endfor %}
                                         <!-- /Error messaging -->
-                                        <div class="row mb-2">
+                                        <div class="row-cols-3 mt-3">
                                             <button class="btn btn-outline-light btn-sm px-1" type="submit">Registrar
                                             </button>
                                         </div>
-
                                     </form>
+                                    <div class="row-cols-3 mt-5"><img src="{% static 'img/tamano.jpg' %}"></div>
                                 </div>
                             </div>
                         </div>

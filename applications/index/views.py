@@ -33,7 +33,6 @@ class IndexView(ListView):
         return PublicacionesPlantas.objects.listarPublicacion(busqueda)
 
 
-
 #####################
 # PUBLICATION VIEWS #
 #####################
@@ -118,3 +117,45 @@ class PublicacionDeleteView(LoginRequiredMixin, DeleteView):
 #################
 # PLANTAS VIEWS #
 #################
+
+class ListPlantasView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('Users_App:user-login')
+    template_name = 'plantas/PlantasList.html'
+    context_object_name = 'ListaPlantas'
+    paginate_by = 15
+
+    def get_queryset(self):
+        busqueda = self.request.GET.get('keyword', '')
+        return Planta.objects.listarPlantas(busqueda)
+
+
+class NewPlantasView(LoginRequiredMixin, FormView):
+    login_url = reverse_lazy('Users_App:user-login')
+
+    template_name = 'plantas/NuevaPlanta.html'
+    form_class = NewPlantaForm
+    success_url = reverse_lazy('Index_App:Index')
+
+    def NuevaPublicacionRequest(self):
+        Plantas = Planta.objects.all()
+        return Plantas
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['Plantas'] = self.NuevaPublicacionRequest()
+        return data
+
+    def form_valid(self, form):
+        """user = User.objects.filter(username=self.request.user)
+        user = user.get()"""
+        PublicacionesPlantas.objects.createPublicacion(
+            fotografia_Pub=form.cleaned_data['fotografia_Pub'],
+            planta_Pub=form.cleaned_data['planta_Pub'],
+            lugar_Sembrada_Pub=form.cleaned_data['lugar_Sembrada_Pub'],
+            fecha_Sembrada=form.cleaned_data['fecha_Sembrada'],
+            sombra=form.cleaned_data['sombra'],
+            sol=form.cleaned_data['sol'],
+            cuidados=form.cleaned_data['cuidados'],
+            usuario=self.request.user
+        )
+        return super(NewPublicacionView, self).form_valid(form)

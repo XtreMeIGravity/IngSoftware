@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from .managers import PublicacionManager
+from .managers import PublicacionManager, PlantasManager
 from applications.users.models import User
 
 
@@ -42,8 +42,11 @@ class Planta(models.Model):
     tipo_Planta = models.ForeignKey(CatTipoPlanta, on_delete=models.CASCADE)
     dimension_Planta = models.ForeignKey(CatDimensionPlanta, on_delete=models.CASCADE)
 
+    # import manager
+    objects = PlantasManager()
+
     def __str__(self):
-        return self.nombre_Planta+" "+self.tipo_Planta.nombre_TipoPlanta+" "+self.dimension_Planta.nombre_DimensionPlanta
+        return self.nombre_Planta + " - " + self.tipo_Planta.nombre_TipoPlanta + " - " + self.dimension_Planta.nombre_DimensionPlanta
 
 
 ########################

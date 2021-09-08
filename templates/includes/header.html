@@ -5,11 +5,21 @@
                 <img src="/static/img/Icon.png">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a  href="{% url 'Index_App:Index' %}" class="nav-link px-2 text-secondary  {% if active_tab == 'Index' %} text-white {% endif %}">Home</a></li>
+                <li><a href="{% url 'Index_App:Index' %}"
+                       class="nav-link px-2 text-secondary  {% if active_tab == 'Index' %} text-white {% endif %}">Home</a>
+                </li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'Index_App:nueva_publicacion' %}"
-                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Publicar' %} text-white {% endif %}">Publicar</a></li>
-                    <li><a href="{% url 'Index_App:user-publicaciones' %}" class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'MisPublicaciones' %} text-white {% endif %}">Mis Publicaciones</a></li>
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Publicar' %} text-white {% endif %}">Publicar</a>
+                    </li>
+                    <li><a href="{% url 'Index_App:user-publicaciones' %}"
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'MisPublicaciones' %} text-white {% endif %}">Mis
+                        Publicaciones</a></li>
+                    <li><a href="{% url 'Index_App:nueva_planta' %}"
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'NuevaPlanta' %} text-white {% endif %}">Nueva
+                        Planta</a></li>
+                    <li><a href="{% url 'Index_App:listar_plantas' %}"
+                           class="nav-link px-2 text-secondary text-secondary {% if active_tab == 'Plantas' %} text-white {% endif %}">Plantas</a></li>
                 {% endif %}
             </ul>
 

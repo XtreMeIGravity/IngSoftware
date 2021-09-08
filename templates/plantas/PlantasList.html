@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block cssCustom %}
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -20,41 +19,39 @@
     </style>
 {% endblock cssCustom %}
 
-{% block title %}Publicaciones{% endblock title %}
+{% block title %}Plantas{% endblock title %}
 
 {% block cuerpo %}
-    {% include "includes/header.html" with active_tab='Index' %}
+    {% include "includes/header.html" with active_tab='Plantas' %}
     <main class="container py-5">
         <h1>Plantas</h1>
         <div class="row" data-masonry='{"percentPosition": true }'>
-            {% for publicacion  in ListaPublicaciones %}
-                <div class="col-sm-6 col-lg-12 mb-4 text-black">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ publicacion.usuario.nombres }} {{ publicacion.usuario.apellidos }}</h5>
-                            <p class="card-text">Contacto: {{ publicacion.usuario.email }}</p>
-                        </div>
-                        <div class="row-cols-5">
-                            <img src="{{ publicacion.fotografia_Pub.url }}">
-                        </div>
-                        <div class="card-body row">
-                            <h4 class="card-title">{{ publicacion.planta_Pub.nombre_Planta }}</h4>
-                            <h5 class="card-title">{{ publicacion.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
-                            <h6 class="card-title">{{ publicacion.planta_Pub.dimension_Planta.nombre_DimensionPlanta }}</h6>
-                            <p class="card-text">{{ publicacion.cuidados|safe }}</p>
-                            <p class="card-text"><small class="text-muted">
-                                Lugar: {{ publicacion.lugar_Sembrada_Pub }} -- Fecha en que se
-                                sembro:{{ publicacion.fecha_Sembrada }}</small></p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+            <table class="table text-white">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Planta</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Dimensión</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for Planta  in ListaPlantas %}
+                    <tr>
+                        <th scope="row">{{ Planta.id }}</th>
+                        <td>{{ Planta.nombre_Planta }}</td>
+                        <td>{{ Planta.tipo_Planta.nombre_TipoPlanta }}</td>
+                        <td>{{ Planta.dimension_Planta.nombre_DimensionPlanta }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
 
         <nav aria-label="Page navigation example text-black">
             <ul class="pagination justify-content-center text-black">
-
-                {% if is_paginated %}
+                {% if ispaginated %}
                     {% if page_obj.has_previous %}
                         <li class="page-item text-black"><a class="page-link text-black"
                                                             href="?page={{ page_obj.previous_page_number }}"
@@ -64,7 +61,6 @@
                                                                      tabindex="-1">Previous</a>
                         </li>
                     {% endif %}
-
                     {% for x in paginator.page_range %}
                         {% if page_obj.number == x %}
                             <li class=" text-black border-dark"><a class="page-link text-black"
@@ -87,7 +83,6 @@
                 {% endif %}
             </ul>
         </nav>
-
     </main>
 
     {% include "includes/footer.html" %}

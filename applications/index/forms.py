@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ValidationError
 import time
-from .models import PublicacionesPlantas, User
+from .models import PublicacionesPlantas, Planta
 
 
 def validateDateEs(date):
@@ -86,3 +86,16 @@ class UpdatePublicacionForm(forms.ModelForm):
         widgets = {
             'fecha_Sembrada': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%d-%m-%Y'),
         }
+
+
+class NewPlantaForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(NewPlantaForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control form-control-sm'
+
+    class Meta:
+        """meta definition for userForm"""
+        model = Planta
+        fields = ('__all__')

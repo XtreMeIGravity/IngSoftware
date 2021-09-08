@@ -34,3 +34,21 @@ class PublicacionManager(models.Manager):
         )
         Publicacion.save(using=self.db)
         return Publicacion
+
+
+class PlantasManager(models.Manager):
+
+    def listarPlantas(self, busqueda):
+        lista = self.filter(
+            nombre_Planta__icontains=busqueda,
+        )
+        return lista
+
+    def createPlanta(self, nombre_Planta, tipo_Planta, dimension_Planta):
+        Planta = self.model(
+            nombre_Planta=nombre_Planta,
+            tipo_Planta=tipo_Planta,
+            dimension_Planta=dimension_Planta
+        )
+        Planta.save(using=self.db)
+        return Planta

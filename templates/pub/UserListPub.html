@@ -19,33 +19,33 @@
     </style>
 {% endblock cssCustom %}
 
-{% block title %} Proyecto 1{% endblock title %}
+{% block title %}Lista de Mis Publicaciónes{% endblock title %}
 
 {% block cuerpo %}
     {% include "includes/header.html" with active_tab='MisPublicaciones' %}
     <main class="container py-5">
         <h1>Mis Plantas</h1>
         <div class="row" data-masonry='{"percentPosition": true }'>
-            {% for Planta  in ListaPublicaciones %}
+            {% for Publicacion  in ListaPublicaciones %}
                 <div class="col-sm-6 col-lg-4 mb-4 text-black">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ Planta.usuario.nombres }} {{ Planta.usuario.apellidos }}</h5>
-                            <p class="card-text">Contacto: {{ Planta.usuario.email }}</p>
+                            <h5 class="card-title">{{ Publicacion.usuario.nombres }} {{ Publicacion.usuario.apellidos }}</h5>
+                            <p class="card-text">Contacto: {{ Publicacion.usuario.email }}</p>
                         </div>
-                        <img src="{{ Planta.fotografia_Pub.url }}">
+                        <img src="{{ Publicacion.fotografia_Pub.url }}">
 
                         <div class="card-body row">
-                            <h4 class="card-title">{{ Planta.planta_Pub.nombre_Planta }}</h4>
-                            <h5 class="card-title">{{ Planta.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
-                            <h6 class="card-title">{{ Planta.planta_Pub.dimension_Planta.nombre_DimensionPlanta }}</h6>
-                            <p class="card-text">{{ Planta.cuidados|safe }}</p>
+                            <h4 class="card-title">{{ Publicacion.planta_Pub.nombre_Planta }}</h4>
+                            <h5 class="card-title">{{ Publicacion.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
+                            <h6 class="card-title">{{ Publicacion.planta_Pub.dimension_Planta.nombre_DimensionPlanta }}</h6>
+                            <p class="card-text">{{ Publicacion.cuidados|safe }}</p>
                             <p class="card-text"><small class="text-muted">
-                                Lugar: {{ Planta.lugar_Sembrada_Pub }} -- Fecha en que se
-                                sembro:{{ Planta.fecha_Sembrada }}</small></p>
+                                Lugar: {{ Publicacion.lugar_Sembrada_Pub }} -- Fecha en que se
+                                sembro:{{ Publicacion.fecha_Sembrada }}</small></p>
                             <p class="card-text"><small class="text-muted">
-                                <a class="btn btn-warning" href="{% url 'Index_App:editar_publicacion' Planta.id %}" >Actualizar</a>
-                                <a class="btn btn-danger"  href="{% url 'Index_App:eliminar_publicacion' Planta.id %}">Borrar</a>
+                                <a class="btn btn-warning" href="{% url 'Index_App:editar_publicacion' Publicacion.id %}" >Actualizar</a>
+                                <a class="btn btn-danger"  href="{% url 'Index_App:eliminar_publicacion' Publicacion.id %}">Borrar</a>
                             </small></p>
                         </div>
                     </div>
