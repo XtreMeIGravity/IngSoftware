@@ -51,7 +51,7 @@
 
         <nav aria-label="Page navigation example text-black">
             <ul class="pagination justify-content-center text-black">
-                {% if ispaginated %}
+                {% if is_paginated %}
                     {% if page_obj.has_previous %}
                         <li class="page-item text-black"><a class="page-link text-black"
                                                             href="?page={{ page_obj.previous_page_number }}"
