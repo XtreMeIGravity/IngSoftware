@@ -28,7 +28,7 @@
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for Publicacion  in ListaPublicaciones %}
                 <div class="col-sm-6 col-lg-4 mb-4 text-black">
-                    <div class="card">
+                    <div class="card row">
                         <div class="card-body">
                             <h5 class="card-title">{{ Publicacion.usuario.nombres }} {{ Publicacion.usuario.apellidos }}</h5>
                             <p class="card-text">Contacto: {{ Publicacion.usuario.email }}</p>
