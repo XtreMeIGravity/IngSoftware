@@ -17,7 +17,7 @@ from .models import User
 class UserRegisterView(FormView):
     template_name = 'users/registrarUsuario.html'
     form_class = UserRegisterForm
-    success_url = '/'
+    success_url = reverse_lazy('Users_App:user-login')
 
     def form_valid(self, form):
         date = form.cleaned_data['fecha_nacimiento']
