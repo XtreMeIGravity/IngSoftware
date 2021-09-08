@@ -41,6 +41,7 @@ class NewPublicacionForm(forms.ModelForm):
         for visible in self.visible_fields():
             if not (visible.field.label == 'Sol' or visible.field.label == 'Sombra'):
                 visible.field.widget.attrs['class'] = 'form-control form-control-sm'
+            visible.field.widget.attrs['autocomplete'] = 'off'
 
     class Meta:
         """meta definition for userForm"""
@@ -78,6 +79,7 @@ class UpdatePublicacionForm(forms.ModelForm):
         for visible in self.visible_fields():
             if not (visible.field.label == 'Sol' or visible.field.label == 'Sombra'):
                 visible.field.widget.attrs['class'] = 'form-control form-control-sm'
+            visible.field.widget.attrs['autocomplete'] = 'off'
 
     class Meta:
         """meta definition for userForm"""
@@ -94,6 +96,7 @@ class NewPlantaForm(forms.ModelForm):
         super(NewPlantaForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control form-control-sm'
+            visible.field.widget.attrs['autocomplete'] = 'off'
 
     class Meta:
         """meta definition for userForm"""
