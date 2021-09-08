@@ -27,14 +27,14 @@
         <h1>Mis Plantas</h1>
         <div class="row" data-masonry='{"percentPosition": true }'>
             {% for Publicacion  in ListaPublicaciones %}
-                <div class="col-sm-6 col-lg-4 mb-4 text-black">
-                    <div class="card row">
+                <div class="col-sm-6 col-lg-12 mb-4 text-black">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ Publicacion.usuario.nombres }} {{ Publicacion.usuario.apellidos }}</h5>
                             <p class="card-text">Contacto: {{ Publicacion.usuario.email }}</p>
                         </div>
-                        <img src="{{ Publicacion.fotografia_Pub.url }}">
-
+                        <div class="row-cols-5">
+                            <img src="{{ Publicacion.fotografia_Pub.url }}"></div>
                         <div class="card-body row">
                             <h4 class="card-title">{{ Publicacion.planta_Pub.nombre_Planta }}</h4>
                             <h5 class="card-title">{{ Publicacion.planta_Pub.tipo_Planta.nombre_TipoPlanta }}</h5>
@@ -44,8 +44,10 @@
                                 Lugar: {{ Publicacion.lugar_Sembrada_Pub }} -- Fecha en que se
                                 sembro:{{ Publicacion.fecha_Sembrada }}</small></p>
                             <p class="card-text"><small class="text-muted">
-                                <a class="btn btn-warning" href="{% url 'Index_App:editar_publicacion' Publicacion.id %}" >Actualizar</a>
-                                <a class="btn btn-danger"  href="{% url 'Index_App:eliminar_publicacion' Publicacion.id %}">Borrar</a>
+                                <a class="btn btn-warning"
+                                   href="{% url 'Index_App:editar_publicacion' Publicacion.id %}">Actualizar</a>
+                                <a class="btn btn-danger"
+                                   href="{% url 'Index_App:eliminar_publicacion' Publicacion.id %}">Borrar</a>
                             </small></p>
                         </div>
                     </div>
