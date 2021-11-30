@@ -12,10 +12,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     username = models.CharField(unique=True, max_length=50)
     email = models.EmailField()
-    nombres = models.CharField(max_length=50, blank=True)
-    apellidos = models.CharField(max_length=50, blank=True)
-    sexo = models.CharField(choices=Gender_Choices, max_length=50, blank=True)
-    fecha_nacimiento = models.DateField(default="1998-09-15", blank=True)
+    name = models.CharField(max_length=50, blank=True)
+    lastname = models.CharField(max_length=50, blank=True)
+    gender = models.CharField(choices=Gender_Choices, max_length=50, blank=True)
+    date_of_birth = models.DateField(default="1998-09-15", blank=True)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
